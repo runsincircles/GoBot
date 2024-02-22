@@ -9,7 +9,7 @@ module.exports.config = {
 	description: "Beginner's Guide",
 	commandCategory: "system",
 	usages: "[command]",
-	usePrefix: false,
+	hasPrefix: false,
 	cooldowns: 0,
 	envConfig: {
 		autoUnsend: false,
