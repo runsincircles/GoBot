@@ -44,7 +44,7 @@ module.exports.run = async function({
       for (let i = start; i < Math.min(end, commands.length); i++) {
         helpMessage += `╭─❍\n➠ ${prefix}${commands[i]}\n╰───────────⟡\n`;
       }
-      helpMessage += '\n• —— [ 𝗔𝗟𝗟 𝗘𝗩𝗘𝗡𝗧𝗦 ] —— •:\n\n';
+      helpMessage += '\n• —— [ 𝗔𝗟𝗟 𝗘𝗩𝗘𝗡𝗧𝗦 ] —— •\n\n';
       eventCommands.forEach((eventCommand, index) => {
         helpMessage += `╭─❍\n➠ ${prefix}${eventCommand}\n╰───────────⟡\n`;
       });
