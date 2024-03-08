@@ -1,33 +1,33 @@
-const axios = require('axios');
-module.exports.config = {
-  name: 'ai',
-  version: '1.0.0',
-  role: 0,
-  hasPrefix: false,
-  aliases: ['gpt', 'openai'],
-  description: "An AI command powered by GPT-4",
-  usage: "Ai [promot]",
-  credits: 'Developer',
-  cooldown: 3,
-};
-module.exports.run = async function({
-  api,
-  event,
-  args
-}) {
-  const input = args.join(' ');
-  if (!input) {
-    api.sendMessage(`Please provide a question or statement after 'ai'. For example: 'ai What is the capital of France?'`, event.threadID, event.messageID);
-    return;
-  }
-  api.sendMessage(`🔍 "${input}"`, event.threadID, event.messageID);
-  try {
-    const {
-      data
-    } = await axios.get(`https://openaikey.onrender.com/api?prompt=${encodeURIComponent(input)}`);
-    const response = data.response;
-    api.sendMessage(response, event.threadID, event.messageID);
-  } catch (error) {
-    api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
-  }
-};
+/* 
+API BY DEKU
+contact: https://facebook.com/joshg101
+*/
+const {get} = require('axios');
+const url = "http://eu4.diresnode.com:3301"; //available model: baymax_gpt, gojo_gpt
+module.exports = {
+    config: {
+        name: "gpt4", //rename it if u want
+        hasPermssion: 0,
+        version: "1.0.0",
+        commandCategory: "AI",
+        credits: "Deku",
+        cooldowns: 0,
+        usages: "[ask]/[]clear] to clear history",
+        usePrefix: false,
+        description: "Talk to GPT4 (with continues conversation)"
+    },
+    run: async function({api, event, args}){
+            let prompt = args.join(' '), id = event.senderID;
+           async function r(msg){
+                 api.sendMessage(msg, event.threadID, event.messageID)
+             }
+            if(!prompt) return r("Missing input!\n\nIf you want to reset the conversation with "+this.config.name+" you can use “"+this.config.name+" clear”");
+            r("🔍…");
+            try {
+                const res = await get(url+"/gpt4?prompt="+prompt+"&idd="+id);
+                return r(res.data.gpt4);
+            } catch (e){
+                return r(e.message)
+            }
+    }
+}
