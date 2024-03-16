@@ -27,7 +27,7 @@ module.exports.run = async function({ api, event, args }) {
     const answer = encodeURIComponent(input[1].trim());
 
     try {
-        const response = await axios.get(`https://simsimi.fun/api/v2/?mode=teach&lang=ph&message=${question}&answer=${answer}`);
+        const response = await axios.get(`https://simsimi.fun/api/v2/?mode=teach&lang=en&message=${question}&answer=${answer}`);
         const responseData = response.data;
         if (responseData.error) {
             api.sendMessage(`Error: ${responseData.error}`, threadID, messageID);
